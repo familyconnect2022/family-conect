@@ -35,7 +35,7 @@ export default function LoginPage() {
         <Fragment>
             <div>User current: {user}</div>
             <div className='h-full w-full flex justify-center items-center'>
-                <div className='w-[70%] max-w-[500px] px-5 py-10 border rounded-md shadow-md bg-white'>
+                <div className='w-[70%] max-w-[400px] px-5 py-10 border rounded-md shadow-md bg-white'>
                     <Form
                         method='POST'
                         onFinish={handleOnSubmit}
@@ -44,7 +44,7 @@ export default function LoginPage() {
                             span: 24,
                         }}
                         labelCol={{
-                            span: 5,
+                            span: 6,
                         }}
                         initialValues={{
                             remember: true,

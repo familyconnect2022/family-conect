@@ -7,13 +7,6 @@ export default function LayoutComponents({children}) {
     const {Content, Sider, Header} = Layout
     const [isCollapsed, setIsCollapsed] = useState(true)
     const handleCollapsed = () => setIsCollapsed(!isCollapsed)
-    const ComponentContent = useCallback(() => {
-        return (
-            <Content className='w-full h-full min-h-screen max-w-7xl m-auto bg-red-100'>
-                {children}
-            </Content>
-        )
-    }, [])
 
     return (
         <Layout className='min-h-screen'>
@@ -25,14 +18,16 @@ export default function LayoutComponents({children}) {
             >
                 <Navbar />
             </Sider>
-            <Layout className=' w-full'>
+            <Layout className=' w-full bg-red-100'>
                 <Header className='bg-green-100 z-20 px-5 lg:px-12'>
                     <HeaderComponent
                         handleCollapsed={handleCollapsed}
                         isCollapsed={isCollapsed}
                     />
                 </Header>
-                <ComponentContent />
+                <Content className='w-full h-full min-h-screen max-w-7xl m-auto '>
+                    {children}
+                </Content>
             </Layout>
         </Layout>
     )

@@ -5,7 +5,7 @@ import Link from 'next/link'
 export default function HeaderComponent({handleCollapsed, isCollapsed}) {
     const {Header} = Layout
     return (
-        <Header className='flex justify-between items-center bg-green-100 z-20 px-5 lg:px-12'>
+        <Header className='flex justify-between items-center bg-green-100 z-20 px-5 lg:px-12 cursor-pointer'>
             <Link href='/' passHref={true}>
                 <div className='flex justify-center items-center gap-2 select-none '>
                     <div className='w-12 h-12 relative'>

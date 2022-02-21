@@ -1,25 +1,9 @@
-import {Button, Checkbox, Form, Input} from 'antd'
+import {Button, Form, Input} from 'antd'
+import {signInWithEmailAndPassword} from 'firebase/auth'
+import Logo from '../../components/Logo'
 import {auth} from '../../firebaseClient'
-import {
-    signInWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut,
-} from 'firebase/auth'
-import {Fragment, useEffect, useState} from 'react'
 
 export default function LoginPage() {
-    const [user, setUser] = useState(null)
-
-    useEffect(() => {
-        const unwrapOnAuthStateChange = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setUser(user.email)
-            } else {
-                setUser(user)
-            }
-        })
-        return () => unwrapOnAuthStateChange()
-    }, [])
     const handleOnSubmit = async (value) => {
         const {email, password} = value
         if (email && password) {
@@ -32,81 +16,65 @@ export default function LoginPage() {
     }
 
     return (
-        <Fragment>
-            <div>User current: {user}</div>
-            <div className='h-full w-full flex justify-center items-center'>
-                <div className='w-[70%] max-w-[400px] px-5 py-10 border rounded-md shadow-md bg-white'>
-                    <Form
-                        method='POST'
-                        onFinish={handleOnSubmit}
-                        name='login-form'
-                        wrapperCol={{
-                            span: 24,
-                        }}
-                        labelCol={{
-                            span: 6,
-                        }}
-                        initialValues={{
-                            remember: true,
-                        }}
+        <div className='h-full w-full flex justify-center items-center'>
+            <div className='w-[70%] max-w-[400px] px-5 py-8 border rounded-md shadow-md bg-white'>
+                <Logo />
+                <Form
+                    className='mt-5'
+                    method='POST'
+                    onFinish={handleOnSubmit}
+                    name='login-form'
+                    wrapperCol={{
+                        span: 24,
+                    }}
+                    labelCol={{
+                        span: 6,
+                    }}
+                >
+                    <Form.Item
+                        className='mb-3'
+                        label='Email'
+                        name='email'
+                        rules={[
+                            {
+                                required: true,
+                                type: 'email',
+                                message: 'Input your email here',
+                            },
+                        ]}
                     >
-                        <h3 className='text-center mb-8 uppercase font-semibold text-lg'>
-                            Login!!!
-                        </h3>
-                        <Form.Item
-                            className='mb-3'
-                            label='Email'
-                            name='email'
-                            rules={[
-                                {
-                                    required: true,
-                                    type: 'email',
-                                    message: 'Input your email here',
-                                },
-                            ]}
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        label='Password'
+                        name='password'
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Input your password here',
+                            },
+                        ]}
+                    >
+                        <Input.Password />
+                    </Form.Item>
+                    <Form.Item className='mb-5 w-full -mt-4 text-center italic'>
+                        <Button type='link' href='/auth/register'>
+                            <span className='underline'>
+                                Bạn chưa có tài khoảng?
+                            </span>
+                        </Button>
+                    </Form.Item>
+                    <Form.Item className='mb-0 w-full'>
+                        <Button
+                            className='inline-block w-full'
+                            htmlType='submit'
+                            type='primary'
                         >
-                            <Input />
-                        </Form.Item>
-                        <Form.Item
-                            label='Password'
-                            name='password'
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Input your password here',
-                                },
-                            ]}
-                        >
-                            <Input.Password />
-                        </Form.Item>
-                        <Form.Item
-                            name='remember'
-                            valuePropName='checked'
-                            wrapperCol={{span: 24, offset: 5}}
-                        >
-                            <Checkbox>Remember me</Checkbox>
-                        </Form.Item>
-                        <Form.Item className='mb-0 w-full'>
-                            <Button
-                                className='inline-block w-full'
-                                htmlType='submit'
-                                type='primary'
-                            >
-                                ĐĂNG NHẬP
-                            </Button>
-                        </Form.Item>
-
-                        <Form.Item className='mb-0 w-full'>
-                            <Button
-                                className='inline-block w-full bg-green-600 mt-5 text-white'
-                                onClick={async () => await signOut(auth)}
-                            >
-                                Sign out
-                            </Button>
-                        </Form.Item>
-                    </Form>
-                </div>
+                            ĐĂNG NHẬP
+                        </Button>
+                    </Form.Item>
+                </Form>
             </div>
-        </Fragment>
+        </div>
     )
 }

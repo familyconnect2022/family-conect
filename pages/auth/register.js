@@ -10,7 +10,6 @@ import {
     updateProfile,
 } from 'firebase/auth'
 import {ref, uploadString} from 'firebase/storage'
-import {async} from '@firebase/util'
 
 export default function CreateAccount() {
     const [imageUrl, setImgUrl] = useState(null)
@@ -21,9 +20,11 @@ export default function CreateAccount() {
     const handleOnChangeAvatar = (info) => {
         if (info.file.status === 'done') {
             // Get this url from response in real world.
-            getBase64(imageObj, (imageUrl) => {
-                setImgUrl(imageUrl)
-            })
+            const imageObj = info.file.originFileObj
+            console.log(imageObj)
+            // getBase64(imageObj, (imageUrl) => {
+            //     setImgUrl(imageUrl)
+            // })
         }
     }
 
@@ -111,9 +112,6 @@ export default function CreateAccount() {
                             showUploadList={false}
                             onChange={handleOnChangeAvatar}
                             accept='.png,.jpeg,.jpg'
-                            headers={{
-                                method: 'GET',
-                            }}
                         >
                             {imageUrl ? (
                                 <div className='w-full h-full rounded-full overflow-hidden p-[2px] bg-red-200'>

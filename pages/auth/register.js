@@ -89,8 +89,7 @@ export default function CreateAccount() {
                 <Logo />
                 <Form
                     ref={(c) => (formRegister.current = c)}
-                    onReset
-                    className='mt-5 lg:px-6'
+                    lassName='mt-5 lg:px-6'
                     method='POST'
                     onFinish={handleOnSubmit}
                     name='register-form'

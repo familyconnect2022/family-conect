@@ -91,7 +91,7 @@ export default function CreateAccount() {
                     ref={(c) => (formRegister.current = c)}
                     className='mt-5 lg:px-6'
                     onFinish={handleOnSubmit}
-                    action='/auth/register'
+                    action={`${process.env.NEXT_BASE}/auth/register`}
                     name='register-form'
                     method='POST'
                     wrapperCol={{
@@ -113,6 +113,9 @@ export default function CreateAccount() {
                             showUploadList={false}
                             onChange={handleOnChangeAvatar}
                             accept='.png,.jpeg,.jpg'
+                            headers={{
+                                'Access-Control-Allow-Origin': '*',
+                            }}
                         >
                             {imageUrl ? (
                                 <div className='w-full h-full rounded-full overflow-hidden p-[2px] bg-red-200'>

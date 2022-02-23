@@ -93,6 +93,7 @@ export default function CreateAccount() {
                     onFinish={handleOnSubmit}
                     action='/auth/register'
                     name='register-form'
+                    method='POST'
                     wrapperCol={{
                         span: 24,
                     }}
@@ -112,7 +113,6 @@ export default function CreateAccount() {
                             showUploadList={false}
                             onChange={handleOnChangeAvatar}
                             accept='.png,.jpeg,.jpg'
-                            headers={{method: 'GET'}}
                         >
                             {imageUrl ? (
                                 <div className='w-full h-full rounded-full overflow-hidden p-[2px] bg-red-200'>

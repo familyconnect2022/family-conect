@@ -19,7 +19,6 @@ export default function CreateAccount() {
     const [checkedFId, setCheckedFId] = useState(false)
 
     const handleOnChangeAvatar = (info) => {
-        console.log(info.file)
         if (info.file.status === 'done') {
             // Get this url from response in real world.
             const imageObj = info.file.originFileObj

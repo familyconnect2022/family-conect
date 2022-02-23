@@ -112,6 +112,7 @@ export default function CreateAccount() {
                             showUploadList={false}
                             onChange={handleOnChangeAvatar}
                             accept='.png,.jpeg,.jpg'
+                            action='/auth/register'
                         >
                             {imageUrl ? (
                                 <div className='w-full h-full rounded-full overflow-hidden p-[2px] bg-red-200'>

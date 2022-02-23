@@ -18,10 +18,10 @@ export default function CreateAccount() {
     const [checkedFId, setCheckedFId] = useState(false)
 
     const handleOnChangeAvatar = (info) => {
+        console.log(info)
         if (info.file.status === 'done') {
             // Get this url from response in real world.
             const imageObj = info.file.originFileObj
-            console.log(imageObj)
             // getBase64(imageObj, (imageUrl) => {
             //     setImgUrl(imageUrl)
             // })
@@ -90,7 +90,6 @@ export default function CreateAccount() {
                 <Form
                     ref={(c) => (formRegister.current = c)}
                     className='mt-5 lg:px-6'
-                    method='POST'
                     onFinish={handleOnSubmit}
                     name='register-form'
                     wrapperCol={{
@@ -112,7 +111,7 @@ export default function CreateAccount() {
                             showUploadList={false}
                             onChange={handleOnChangeAvatar}
                             accept='.png,.jpeg,.jpg'
-                            action='/auth/register'
+                            headers={{method: 'GET'}}
                         >
                             {imageUrl ? (
                                 <div className='w-full h-full rounded-full overflow-hidden p-[2px] bg-red-200'>

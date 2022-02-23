@@ -19,13 +19,13 @@ export default function CreateAccount() {
 
     const handleOnChangeAvatar = (info) => {
         console.log(info)
-        if (info.file.status === 'done') {
-            // Get this url from response in real world.
-            const imageObj = info.file.originFileObj
-            // getBase64(imageObj, (imageUrl) => {
-            //     setImgUrl(imageUrl)
-            // })
-        }
+        // if (info.file.status === 'done') {
+        //     // Get this url from response in real world.
+        //     const imageObj = info.file.originFileObj
+        //     // getBase64(imageObj, (imageUrl) => {
+        //     //     setImgUrl(imageUrl)
+        //     // })
+        // }
     }
 
     const handleChangeFamilyId = (value) => {
@@ -91,6 +91,7 @@ export default function CreateAccount() {
                     ref={(c) => (formRegister.current = c)}
                     className='mt-5 lg:px-6'
                     onFinish={handleOnSubmit}
+                    action='/auth/register'
                     name='register-form'
                     wrapperCol={{
                         span: 24,

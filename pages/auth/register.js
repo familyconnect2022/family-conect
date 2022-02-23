@@ -21,10 +21,7 @@ export default function CreateAccount() {
     const handleOnChangeAvatar = (info) => {
         if (info.file.status === 'done') {
             // Get this url from response in real world.
-            const imageObj = info.file.originFileObj
-            delete imageObj.response
             getBase64(imageObj, (imageUrl) => {
-                console.log(imageUrl)
                 setImgUrl(imageUrl)
             })
         }
@@ -114,6 +111,9 @@ export default function CreateAccount() {
                             showUploadList={false}
                             onChange={handleOnChangeAvatar}
                             accept='.png,.jpeg,.jpg'
+                            headers={{
+                                method: 'GET',
+                            }}
                         >
                             {imageUrl ? (
                                 <div className='w-full h-full rounded-full overflow-hidden p-[2px] bg-red-200'>

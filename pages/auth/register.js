@@ -17,10 +17,15 @@ export default function CreateAccount() {
     const [error, setError] = useState(null)
     const formRegister = useRef()
     const [checkedFId, setCheckedFId] = useState(false)
+
     const handleOnChangeAvatar = (info) => {
+        console.log(info.file)
         if (info.file.status === 'done') {
             // Get this url from response in real world.
-            getBase64(info.file.originFileObj, (imageUrl) => {
+            const imageObj = info.file.originFileObj
+            delete imageObj.response
+            getBase64(imageObj, (imageUrl) => {
+                console.log(imageUrl)
                 setImgUrl(imageUrl)
             })
         }
@@ -42,7 +47,6 @@ export default function CreateAccount() {
             )}`
         }
         const valueSubmit = {...value, avatar: imageUrl}
-
         await createUserWithEmailAndPassword(
             auth,
             valueSubmit.email,
@@ -79,7 +83,6 @@ export default function CreateAccount() {
                         return setError('An unknown error')
                 }
             })
-
         // console.log(valueSubmit)
         // resetForm()
     }
@@ -89,7 +92,7 @@ export default function CreateAccount() {
                 <Logo />
                 <Form
                     ref={(c) => (formRegister.current = c)}
-                    lassName='mt-5 lg:px-6'
+                    className='mt-5 lg:px-6'
                     method='POST'
                     onFinish={handleOnSubmit}
                     name='register-form'
